@@ -1,17 +1,26 @@
+/** Based on CSS-Tricks Article, Changed the name of the mixin to Build */
+
 /**
  * Computes a CSS calc function that betweens a value from
  * A to B over viewport-width A to viewport-width B.
  * Requires a media query to cap the value at B.
  */
 
-@function between($to, $from, $toWidth, $fromWidth) {
+@function build($to, $from, $toWidth, $fromWidth) {
   $slope: ($to - $from) / ($toWidth - $fromWidth);
   $base: $from - $slope * $fromWidth;
 
   @return calc(#{$base} + #{100vw * $slope});
 }
 
-S$small: 400px; 
+
+/*******************************/
+/* How to use */
+
+/*******************************/
+
+
+$small: 400px; 
 $large: 1000px;
 
 .Container {
@@ -21,7 +30,7 @@ $large: 1000px;
   /* In $small it should be 20px and in $large it should be 100px,  */
   /* In viewports between that its padding should be calculated */
   @media (min-width: $small) {
-    padding: between(20px, 100px, $small, $large);
+    padding: build(20px, 100px, $small, $large);
   }
 
 /* In $large we cap the value at 100px */
